@@ -1,0 +1,18 @@
+{
+  "short_name": "PromptVault",
+  "name": "PromptVault — AI Prompt Library",
+  "icons": [
+    {
+      "src": "https://api.iconify.design/lucide:terminal.svg?color=%236366f1",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0B0F17",
+  "theme_color": "#4F46E5",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/"
+}

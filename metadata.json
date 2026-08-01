@@ -1,0 +1,6 @@
+{
+  "name": "PromptVault",
+  "description": "Personal card-catalog prompt library with instant Cmd+K search, version history, role organization, and AI prompt assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

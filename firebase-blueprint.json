@@ -1,0 +1,38 @@
+{
+  "schema": {
+    "prompts": {
+      "id": "string",
+      "title": "string",
+      "body": "string",
+      "role_id": "string",
+      "tags": "array",
+      "is_favorite": "boolean",
+      "usage_count": "number",
+      "version_history": "array",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "roles": {
+      "id": "string",
+      "name": "string",
+      "description": "string",
+      "color_accent": "string",
+      "icon": "string",
+      "sort_order": "number"
+    }
+  },
+  "security_rules": {
+    "match_paths": [
+      {
+        "path": "/prompts/{promptId}",
+        "read": "true",
+        "write": "true"
+      },
+      {
+        "path": "/roles/{roleId}",
+        "read": "true",
+        "write": "true"
+      }
+    ]
+  }
+}
