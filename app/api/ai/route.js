@@ -11,8 +11,8 @@ export async function POST(req) {
         "X-Title": "AI App",
       },
       body: JSON.stringify({
-        // 🔥 FAST + FREE MODEL
-        model: "deepseek/deepseek-chat-v3-0324:free",
+        // 🔥 ACTIVE HIGH-PERFORMANCE MODEL
+        model: process.env.OPENROUTER_MODEL || "deepseek/deepseek-chat",
 
         messages: [
           {

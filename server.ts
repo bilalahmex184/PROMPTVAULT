@@ -20,7 +20,7 @@ async function callLLM({
   promptText: string;
 }): Promise<string> {
   const openrouterKey = process.env.OPENROUTER_API_KEY;
-  const modelName = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.3-70b-instruct';
+  const modelName = process.env.OPENROUTER_MODEL || 'deepseek/deepseek-chat';
 
   if (openrouterKey && openrouterKey.trim() !== '') {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -37,7 +37,7 @@ async function callLLM({
           { role: 'system', content: systemInstruction },
           { role: 'user', content: promptText },
         ],
-        response_format: { type: 'json_object' },
+        temperature: 0.2,
       }),
     });
 
@@ -74,11 +74,27 @@ async function callLLM({
 }
 
 function parseJSONFromResponse(raw: string): any {
+  if (!raw || typeof raw !== 'string') return {};
   let cleaned = raw.trim();
-  if (cleaned.startsWith('```')) {
-    cleaned = cleaned.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
+
+  // Strip markdown codeblocks
+  cleaned = cleaned.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+
+  try {
+    return JSON.parse(cleaned);
+  } catch (err) {
+    // Attempt regex extraction for json object or array
+    const jsonMatch = cleaned.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
+    if (jsonMatch) {
+      try {
+        return JSON.parse(jsonMatch[0]);
+      } catch (innerErr) {
+        console.error('Failed to parse extracted JSON match:', innerErr);
+      }
+    }
+    console.error('Raw string failed JSON parsing:', raw);
+    throw new Error('LLM output was not valid JSON format.');
   }
-  return JSON.parse(cleaned);
 }
 
 // API Routes

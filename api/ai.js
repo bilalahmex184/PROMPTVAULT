@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         "X-Title": "AI App",
       },
       body: JSON.stringify({
-        model: process.env.OPENROUTER_MODEL || "deepseek/deepseek-chat-v3-0324:free",
+        model: process.env.OPENROUTER_MODEL || "deepseek/deepseek-chat",
         messages: [
           {
             role: "user",
